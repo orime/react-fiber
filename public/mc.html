@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Message Channel 测试</title>
+</head>
+<body>
+  <script>
+    const channel = new MessageChannel()
+    const port1 = channel.port1
+    const port2 = channel.port2
+    port1.onmessage = function(event){
+      console.log(`por1 收到来自 port2 的数据 ${event.data}`)
+    }
+    port2.onmessage = function(event){
+      console.log(`por2 收到来自 port1 的数据 ${event.data}`)
+    }
+    port1.postMessage('发送给port2')
+    port2.postMessage('发送给port1')
+  </script>
+</body>
+</html>
